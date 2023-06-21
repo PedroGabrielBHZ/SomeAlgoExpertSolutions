@@ -14,6 +14,7 @@ vector<vector<int>> stableInternships(vector<vector<int>> interns, vector<vector
   // keep trying to match while there is an unmatched intern
   while (unmatched_intern)
   {
+    // suppose that there are no unmatched interns this time
     unmatched_intern = false;
 
     // go through intern i team preferences
@@ -93,4 +94,25 @@ vector<vector<int>> stableInternships(vector<vector<int>> interns, vector<vector
     matches.push_back({i, intern_matchings[i]});
   }
   return matches;
+}
+
+int main(int argc, char const *argv[])
+{
+  vector<vector<int>> interns = {{0, 1}, {1, 0}};
+  vector<vector<int>> teams = {{1, 0}, {1, 0}};
+  vector<vector<int>> expected = {{0, 0}, {1, 1}};
+  auto actual = stableInternships(interns, teams);
+
+  for (int i = 0; i < interns.size(); i++)
+  {
+    for (int j = 0; j < interns.size(); j++)
+    {
+      if (actual[i][j] != expected[i][j])
+      {
+        std::cout << "FAIL !!!\n";
+      }
+    }
+  }
+
+  return 0;
 }
